@@ -6,7 +6,6 @@ from fastapi.responses import JSONResponse
 from fastapi import FastAPI, Request, status
 from pydantic import BaseModel
 from typing import Optional
-from predict.hello import say_hello
 import pandas as pd
 from predict.prediction import predict
 from preprocessing.cleaning_data import preprocess
@@ -46,7 +45,7 @@ class Item(BaseModel):
 
 
 
-@app.post("/post")
+@app.post("/predict")
 def create_item(item: Item):
     print('in')
     data = {"Living area (m²)":[item.area],
@@ -62,15 +61,4 @@ def create_item(item: Item):
     print('res dict', type(results_dict))
     return     results_dict
 
-@app.post("/t2")
-def some_name(varaibe: Item):
-    return say_hello(varaibe)
-
-@app.post("/testurl")
-def some_name(varaibe: Item):
-    return say_hello(varaibe)
-
-@app.get("/t1")
-def some_func(Name_of_var:Item):
-    return preprocess(Name_of_var)
 
